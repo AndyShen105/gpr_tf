@@ -482,6 +482,17 @@ def create_random_matrices(n_samples=3000, n_feats=12, n_test=444):
 
     return X_train, y_train, X_test, length_scale, magnitude, ridge
 
+def read_matrices(n_feats, filepath):
+    train_file = open(filepath)
+    train_data = train_file.readlines()   
+    X_train = np.array([s.strip().split(",")[0: (n_feats-1)] for s in train_data])
+    Y_train = np.array([s.strip().split(",")[(n_feats-1):] for s in train_data])
+
+    length_scale = np.random.rand()
+    magnitude = np.random.rand()
+    ridge = np.ones(n_samples)*np.random.rand()
+
+
 def check_equivalence():
     X_train, y_train, X_test, length_scale, magnitude, ridge = create_random_matrices()
 
